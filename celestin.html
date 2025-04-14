@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CELESTIN IMAGE - Studio de Création Visuelle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .soft-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .chat-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+        }
+        .animate-pulse {
+            animation: pulse cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .package-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f59e0b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .hero-image {
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+        }
+        .hero-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3);
+        }
+        .category-section {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Top Bar -->
+    <div class="bg-blue-900 text-white py-2 px-4 text-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-blue-200"><i class="fas fa-globe mr-1"></i> Français</a>
+                <a href="#" class="hover:text-blue-200"><i class="fas fa-headset mr-1"></i> Support</a>
+                <a href="tel:+237690188729" class="hover:text-blue-200"><i class="fas fa-phone-alt mr-1"></i> +237 690 188 729</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-blue-200"><i class="fas fa-user-plus mr-1"></i> S'inscrire</a>
+                <a href="#" class="hover:text-blue-200"><i class="fas fa-sign-in-alt mr-1"></i> Connexion</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold text-blue-800 flex items-center soft-title">
+                    <i class="fas fa-camera-retro mr-2"></i>
+                    <span>CELESTIN IMAGE</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="w-1/3 mx-4">
+                <div class="relative">
+                    <input type="text" placeholder="Rechercher des services créatifs..." 
+                           class="w-full py-2 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="absolute right-0 top-0 h-full px-4 bg-blue-600 text-white rounded-r-full hover:bg-blue-700">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex items-center space-x-6">
+                <div class="dropdown relative">
+                    <button class="flex items-center text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-th-large mr-1"></i>
+                        <span>Catégories</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="dropdown-menu absolute hidden mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+                        <a href="#photographie" class="block px-4 py-2 text-gray-800 hover:bg-blue-50" onclick="scrollToCategory('photographie')">Photographie</a>
+                        <a href="#retouche" class="block px-4 py-2 text-gray-800 hover:bg-blue-50" onclick="scrollToCategory('retouche')">Retouche photo</a>
+                        <a href="#design" class="block px-4 py-2 text-gray-800 hover:bg-blue-50" onclick="scrollToCategory('design')">Design Graphique</a>
+                        <a href="#video" class="block px-4 py-2 text-gray-800 hover:bg-blue-50" onclick="scrollToCategory('video')">Montage Vidéo</a>
+                        <a href="#illustration" class="block px-4 py-2 text-gray-800 hover:bg-blue-50" onclick="scrollToCategory('illustration')">Illustration</a>
+                    </div>
+                </div>
+                <a href="#" class="text-gray-700 hover:text-blue-600 flex items-center">
+                    <i class="fas fa-images mr-1"></i>
+                    <span>Portfolio</span>
+                </a>
+                <a href="#packages" class="text-gray-700 hover:text-blue-600 flex items-center">
+                    <i class="fas fa-box-open mr-1"></i>
+                    <span>Packages</span>
+                </a>
+                <a href="#" class="text-gray-700 hover:text-blue-600 flex items-center">
+                    <i class="fas fa-shopping-cart mr-1"></i>
+                    <span>Panier</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl font-bold mb-4 soft-title">STUDIO DE CRÉATION VISUELLE</h1>
+                <p class="text-xl mb-6">Donnez vie à vos idées avec notre expertise en photographie, retouche et design graphique de haute qualité.</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="bg-white text-blue-800 font-semibold py-3 px-6 rounded-full hover:bg-gray-100 text-center animate-pulse">
+                        <i class="fas fa-camera mr-2"></i> Découvrir nos réalisations
+                    </a>
+                    <a href="#" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-6 rounded-full hover:bg-white hover:text-blue-800 text-center">
+                        <i class="fas fa-calendar-alt mr-2"></i> Prendre rendez-vous
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://z-p3-scontent.fdla3-2.fna.fbcdn.net/v/t39.30808-6/485901090_1482199376087084_322134575837821986_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGnAJX_DIW9v8nXuDK2tu6XFYKAz7dW-A0VgoDPt1b4DTi6e3OO6X3xgoYwacvnzPec8oYeq17W41st_ldu1UEU&_nc_ohc=73fEoQP2mTwQ7kNvwH2MgSD&_nc_oc=Adlx0xvdCqOrOrZljW_5z3Vwf51FYz3goTeXtsIb3u_n0zPNLzStqWPZYmEy_4ATPbQ&_nc_zt=23&_nc_ht=z-p3-scontent.fdla3-2.fna&_nc_gid=5bHk77YtPetz0gAbDUHTrQ&oh=00_AfEmTxxilG700xM6nytQtVeWfv1_ZWQ8hbHpY2Qmse4zzQ&oe=67F9992B" 
+                     alt="Photographe professionnel" 
+                     class="hero-image max-w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 soft-title">NOS DOMAINES D'EXPERTISE</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <a href="#photographie" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all" onclick="scrollToCategory('photographie')">
+                    <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-camera text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Photographie</h3>
+                </a>
+                <a href="#retouche" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all" onclick="scrollToCategory('retouche')">
+                    <div class="bg-purple-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-magic text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Retouche Photo</h3>
+                </a>
+                <a href="#design" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all" onclick="scrollToCategory('design')">
+                    <div class="bg-green-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-paint-brush text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Design Graphique</h3>
+                </a>
+                <a href="#video" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all" onclick="scrollToCategory('video')">
+                    <div class="bg-yellow-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-video text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Montage Vidéo</h3>
+                </a>
+                <a href="#illustration" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all" onclick="scrollToCategory('illustration')">
+                    <div class="bg-red-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-pencil-ruler text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Illustration</h3>
+                </a>
+                <a href="#" class="category-card bg-gray-50 rounded-lg p-4 text-center hover:shadow-md transition-all">
+                    <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-print text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold">Impression</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photographie Section -->
+    <section id="photographie" class="category-section py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 soft-title flex items-center">
+                <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-camera text-blue-600"></i>
+                </div>
+                <span>Photographie</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-gratuite/portrait-jeune-homme-tenant-appareil-photo-pour-journee-mondiale-photographie_23-2151609262.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Photographie Portrait" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Séance Photo Portrait</h3>
+                        <p class="text-gray-600 mb-4">Séance photo professionnelle en studio ou en extérieur avec 15 retouches incluses.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">75 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-gratuite/portrait-femmes-lesbiennes-lors-leur-ceremonie-mariage_23-2150835683.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_hybrid&w=740" alt="Photographie Mariage" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Photographie de Mariage</h3>
+                        <p class="text-gray-600 mb-4">Couverture complète de votre journée spéciale : Mairie et soirée. avec album photo premium de 180 photos, deux films de 20 minutes chacune et trois agrandissements inclus.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">250 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_1280.jpg" alt="Photographie Produit" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Photographie de Produit</h3>
+                        <p class="text-gray-600 mb-4">Mise en valeur professionnelle de vos produits pour vos boutiques en ligne.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">15 000 FCFA/produit</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retouche Photo Section -->
+    <section id="retouche" class="category-section py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 soft-title flex items-center">
+                <div class="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-magic text-purple-600"></i>
+                </div>
+                <span>Retouche Photo</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/exposition-art-pour-celebration-du-mois-histoire-noirs_973275-143886.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Retouche Portrait" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Retouche Portrait</h3>
+                        <p class="text-gray-600 mb-4">Correction peau, éclaircissement des yeux, blanchiment des dents et amélioration globale.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">4 000 FCFA/photo</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/scene-seance-photo-fond-blanc-hyperrealiste_943281-76504.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Retouche Professionnelle" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Retouche Professionnelle</h3>
+                        <p class="text-gray-600 mb-4">Retouche avancée avec suppression d'objets, changement de fond et correction couleur.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">5000 FCFA/photo</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/groupe-bouteilles-cosmetiques-isolees-blanc_392895-460189.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Retouche Produit" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Retouche Produit</h3>
+                        <p class="text-gray-600 mb-4">Optimisation des images produits pour e-commerce avec fond blanc et amélioration des détails.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">3500 FCFA/photo</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Graphique Section -->
+    <section id="design" class="category-section py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 soft-title flex items-center">
+                <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-paint-brush text-green-600"></i>
+                </div>
+                <span>Design Graphique</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/logo-or-societe-appelee-sau_1306097-94722.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Logo Design" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Création de Logo</h3>
+                        <p class="text-gray-600 mb-4">Design de logo unique et professionnel pour votre marque avec plusieurs propositions.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">50 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/modele-conception-vectorielle-du-logo-u-entreprise_1029473-528135.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Charte Graphique" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Charte Graphique</h3>
+                        <p class="text-gray-600 mb-4">Identité visuelle complète avec logo, couleurs, typographie et guidelines d'utilisation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">150 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-gratuite/equipement-fabrication-moderne-dans-usine-futuriste-generee-par-ia_188544-18464.jpg?t=st=1744031854~exp=1744035454~hmac=61c3816c430ad8f44be0fa988e8e81cb75cc8f863877a0be25af51265daea895&w=1060" alt="Design Print" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Design Print</h3>
+                        <p class="text-gray-600 mb-4">Création de supports print (cartes de visite, flyers, affiches) prêts à imprimer.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">30 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Montage Vidéo Section -->
+    <section id="video" class="category-section py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 soft-title flex items-center">
+                <div class="bg-yellow-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-video text-yellow-600"></i>
+                </div>
+                <span>Montage Vidéo</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-gratuite/homme-filmant-camera-professionnelle-pour-nouveau-film_23-2149066401.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Montage Vidéo" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Montage Vidéo Standard</h3>
+                        <p class="text-gray-600 mb-4">Montage de vos rushs avec transitions, musique et sous-titres simples.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">60 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/editeur-post-production-professionnel-faisant-du-montage-sequences-amelioration-visuelle-employe-bureau-agence-creation-assis-poste-travail-multi-ecrans-tout-modifiant-contenu-graphique-ordinateur_482257-41678.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Montage Professionnel" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Montage Professionnel</h3>
+                        <p class="text-gray-600 mb-4">Montage avancé avec effets spéciaux, color grading et animations graphiques.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">100 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <video src="https://videocdn.cdnpk.net/videos/06b28cdd-df73-5514-a1db-bd371de5145e/horizontal/previews/clear/large.mp4?token=exp=1744033395~hmac=efc9de42f1f4e0f7cc6121a95a7c19305192f553174adafd684b3a71e8043b7a" alt="Motion Design" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Motion Design</h3>
+                        <p class="text-gray-600 mb-4">Création d'animations et vidéos explicatives avec éléments graphiques animés.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">150 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Illustration Section -->
+    <section id="illustration" class="category-section py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 soft-title flex items-center">
+                <div class="bg-red-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-pencil-ruler text-red-600"></i>
+                </div>
+                <span>Illustration</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/graphiques-affaires-contre-homme-affaires-detendu-mains-derriere-tete_1134-74310.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Illustration Digitale" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Illustration Digitale</h3>
+                        <p class="text-gray-600 mb-4">Création d'illustrations personnalisées pour vos projets (livres, affiches, réseaux sociaux).</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">40 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-premium/conception-entreprise_931878-366157.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Dessin Vectoriel" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Dessin Vectoriel</h3>
+                        <p class="text-gray-600 mb-4">Illustrations vectorielles modifiables pour logos, icônes et designs print.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">35 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://img.freepik.com/photos-gratuite/personnage-bucheron-dessin-anime-3d_1048-18354.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Character Design" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Character Design</h3>
+                        <p class="text-gray-600 mb-4">Création de personnages uniques pour jeux, animations ou branding.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">60 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold soft-title">NOS PACKAGES CRÉATIFS</h2>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold flex items-center">
+                    Voir tout <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Package 1 - Templates Photoshop -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="relative">
+                        <img src="https://img.freepik.com/photos-gratuite/inspirer-croire-rever-creer-concept_53876-124158.jpg?t=st=1743768805~exp=1743772405~hmac=c275be4baacd711078df897e9787d58131ccdc1e82a255b916d2021a8a65ebd3&w=740 " alt="Templates Photoshop" class="w-full h-48 object-cover">
+                        <div class="package-badge">MEILLEURE VENTE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Pack Templates Photoshop</h3>
+                        <p class="text-gray-600 mb-4">Collection premium de 150+ templates PSD pour vos projets créatifs (affiches, réseaux sociaux, cartes de visite).</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">50 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 2 - Templates Illustrator -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="relative">
+                        <img src="https://img.freepik.com/photos-gratuite/concept-strategie-planification-strategie-marketing_53876-42950.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_hybrid" alt="Templates Illustrator" class="w-full h-48 object-cover">
+                        <div class="package-badge">NOUVEAU</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Pack Templates Illustrator</h3>
+                        <p class="text-gray-600 mb-4">120+ templates AI et EPS pour logos, illustrations vectorielles et designs print-ready. Formats modifiables.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600" >75 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 3 - Templates Premiere Pro -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="relative">
+                        <img src="https://img.freepik.com/photos-gratuite/videaste-noir-souriant-projet-video-montage-camera-dans-logiciel-post-production-travaillant-dans-bureau-studio-creatif_482257-5421.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_hybridalt="Templates Premiere Pro" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Pack Templates Premiere Pro</h3>
+                        <p class="text-gray-600 mb-4">80+ templates de montage vidéo professionnels (intros, transitions, effets) pour vos projets vidéo.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">65 000 FCFA</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold soft-title">NOS PRESTATIONS PHARES</h2>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold flex items-center">
+                    Voir tout <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service Card 1 -->
+                <div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
+                    <div class="relative">
+                        <img src="https://img.freepik.com/photos-premium/belle-femme-noire-camera-analogique_53876-149076.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Service" class="w-full h-48 object-cover">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">TOP VENDEUR</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="font-semibold">4.9</span>
+                <span class="text-gray-500 ml-1">(128)</span>
+            </div>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Séance Photo Portrait</h3>
+        <p class="text-gray-600 text-sm mb-3">Séance photo professionnelle en studio ou en extérieur avec 15 retouches incluses.</p>
+        <div class="flex justify-between items-center">
+            <span class="font-bold text-lg">75 000 FCFA</span>
+            <button class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Service Card 2 -->
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
+    <div class="relative">
+        <img src="https://img.freepik.com/photos-gratuite/portrait-collage-creatif_23-2150108939.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Service" class="w-full h-48 object-cover">
+        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">NOUVEAU</div>
+    </div>
+    <div class="p-4">
+        <div class="flex items-center mb-2">
+            <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="font-semibold">5.0</span>
+                <span class="text-gray-500 ml-1">(64)</span>
+            </div>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Retouche Photo Premium</h3>
+        <p class="text-gray-600 text-sm mb-3">Retouche professionnelle de vos photos avec correction couleur et détourage précis.</p>
+        <div class="flex justify-between items-center">
+            <span class="font-bold text-lg">8 000 FCFA/photo</span>
+            <button class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Service Card 3 -->
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
+    <div class="relative">
+        <img src="https://img.freepik.com/photos-premium/set-modeles-identite-entreprise-modele-blanc-conception-marque-modele-papeterie-entreprise_1199132-145228.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" alt="Service" class="w-full h-48 object-cover">
+    </div>
+    <div class="p-4">
+        <div class="flex items-center mb-2">
+            <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="font-semibold">4.8</span>
+                <span class="text-gray-500 ml-1">(215)</span>
+            </div>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Identité Visuelle</h3>
+        <p class="text-gray-600 text-sm mb-3">Création complète de logo, charte graphique et éléments de branding.</p>
+        <div class="flex justify-between items-center">
+            <span class="font-bold text-lg">150 000 FCFA</span>
+            <button class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Service Card 4 -->
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
+    <div class="relative">
+        <img src="https://img.freepik.com/photos-premium/editeur-photos-examinant-script-avant-travail_274679-37671.jpg?uid=R101713780&ga=GA1.1.1469754706.1729841662&semt=ais_country_boost&w=740" at="Service" class="w-full h-48 object-cover">
+        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">PROMO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex items-center mb-2">
+            <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="font-semibold">4.7</span>
+                <span class="text-gray-500 ml-1">(178)</span>
+            </div>
+        </div>
+        <h3 class="font-semibold text-lg mb-2">Montage Vidéo Professionnel</h3>
+        <p class="text-gray-600 text-sm mb-3">Montage de vidéos avec effets, transitions, sous-titres et musique.</p>
+        <div class="flex justify-between items-center">
+            <span class="font-bold text-lg line-through text-gray-400 mr-2">80 000 FCFA</span>
+            <span class="font-bold text-lg text-red-500">60 000 FCFA</span>
+            <button class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 soft-title">NOTRE PROCESSUS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">1. Consultation</h3>
+                    <p class="text-gray-600">Nous écoutons vos besoins et vous conseillons sur la meilleure approche créative.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-camera text-purple-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">2. Réalisation</h3>
+                    <p class="text-gray-600">Notre équipe travaille à la création de vos contenus visuels avec professionnalisme.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-thumbs-up text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">3. Livraison</h3>
+                    <p class="text-gray-600">Vous recevez vos créations finalisées dans les délais convenus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 soft-title">TÉMOIGNAGES CLIENTS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sophie Martin</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Les photos de mon mariage sont magnifiques. Celestin a su capturer chaque émotion avec sensibilité et professionnalisme."</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Thomas Dubois</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"L'identité visuelle créée pour mon entreprise est parfaite. Professionnel, créatif et à l'écoute. Je recommande vivement!"</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Émilie Lambert</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Le montage de notre vidéo corporate est impeccable. Les retouches ont été faites rapidement et avec une qualité irréprochable."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-3xl font-bold mb-4 soft-title">NOTRE PORTFOLIO</h2>
+                    <p class="text-gray-600 mb-6">Découvrez une sélection de nos réalisations dans différents domaines de la création visuelle.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Photographie professionnelle (portrait, produit, événement)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Retouche et correction photo avancée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Création d'identités visuelles complètes</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="mt-6 inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-700">
+                        <i class="fas fa-images mr-2"></i> Voir notre portfolio complet
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://cdn.pixabay.com/photo/2015/07/02/10/27/woman-828888_1280.jpg" alt="Portfolio 1" class="rounded-lg shadow-lg">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/25/17/20/lake-2008328_1280.jpg" alt="Portfolio 2" class="rounded-lg shadow-lg">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_1280.jpg" alt="Portfolio 3" class="rounded-lg shadow-lg">
+                        <img src="https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg" alt="Portfolio 4" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row-reverse items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+                    <h2 class="text-3xl font-bold mb-4 soft-title">NOTRE ÉQUIPEMENT</h2>
+                    <p class="text-gray-600 mb-6">Nous travaillons avec du matériel professionnel de pointe pour garantir des résultats de qualité exceptionnelle.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm mb-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-camera text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Appareils photo professionnels</h4>
+                                <p class="text-gray-600 text-sm">Canon EOS R5, Sony A7R IV et objectifs haut de gamme</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm mb-4">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-desktop text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Post-production</h4>
+                                <p class="text-gray-600 text-sm">Ecrans calibrés Adobe RGB et logiciels professionnels</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-video text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Matériel vidéo</h4>
+                <p class="text-gray-600 text-sm">DJI Ronin, éclairage professionnel et micros de qualité</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="md:w-1/2">
+    <img src="https://img.freepik.com/photos-gratuite/vue-dessus-disposition-differents-elements-deplacement_23-2148884961.jpg?t=st=1743763872~exp=1743767472~hmac=95acbb9defa6eb47cf7b0d9c8c73acc5cdfe27c23debd7a0512dd98207e34643&w=996" alt="Équipement professionnel" class="rounded-lg shadow-xl">
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment -->
+    <section class="py-12 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4 soft-title">PRISE DE RENDEZ-VOUS</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Planifiez votre séance photo ou une consultation pour discuter de votre projet créatif.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="bg-white bg-opacity-20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Disponibilité</h3>
+                    <p>Disponible 24H/24 de lundi à samedi</p>
+                </div>
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="bg-white bg-opacity-20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-map-marker-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Studio</h3>
+                    <p>Bafoussam, CAMEROUN</p>
+                </div>
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="bg-white bg-opacity-20 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-phone-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Contact</h3>
+                    <p>+237 690 188 729 ou via notre formulaire</p>
+                </div>
+            </div>
+            <a href="#" class="inline-block bg-white text-blue-800 font-semibold py-3 px-8 rounded-full hover:bg-gray-100">
+                <i class="fas fa-calendar-alt mr-2"></i> Prendre rendez-vous
+            </a>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-2 soft-title">NEWSLETTER</h2>
+            <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Abonnez-vous pour recevoir nos offres spéciales, conseils photo et actualités du studio.</p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Votre email" class="flex-grow py-3 px-4 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button class="bg-blue-600 text-white py-3 px-6 rounded-r-lg hover:bg-blue-700">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">Nous utilisons votre email uniquement pour vous envoyer nos newsletters. Vous pouvez vous désabonner à tout moment.</p>
+            <p class="text-sm text-gray-500 mt-2">Email de contact : <a href="mailto:yvesmvondinet@gmail.com" class="text-blue-600 hover:underline">yvesmvondinet@gmail.com</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center soft-title">
+                        <i class="fas fa-camera-retro mr-2"></i>
+                        <span>CELESTIN IMAGE</span>
+                    </h3>
+                    <p class="text-gray-400">Studio de création visuelle professionnelle spécialisé en photographie, retouche et design graphique.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <a href="tel:+237690188729" class="text-gray-400 hover:text-white"><i class="fas fa-phone-alt mr-2"></i> +237 690 188 729</a>
+                    </div>
+                    <div class="mt-2">
+                        <a href="mailto:yvesmvondinet@gmail.com" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i> yvesmvondinet@gmail.com</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#photographie" class="text-gray-400 hover:text-white" onclick="scrollToCategory('photographie')">Photographie</a></li>
+                        <li><a href="#retouche" class="text-gray-400 hover:text-white" onclick="scrollToCategory('retouche')">Retouche photo</a></li>
+                        <li><a href="#design" class="text-gray-400 hover:text-white" onclick="scrollToCategory('design')">Design Graphique</a></li>
+                        <li><a href="#video" class="text-gray-400 hover:text-white" onclick="scrollToCategory('video')">Montage Vidéo</a></li>
+                        <li><a href="#illustration" class="text-gray-400 hover:text-white" onclick="scrollToCategory('illustration')">Illustration</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Packages</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#packages" class="text-gray-400 hover:text-white">Templates Photoshop</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white">Templates Illustrator</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white">Templates Premiere Pro</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white">Assets Vidéo/Audio</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white">Photos libres de droits</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Informations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tarifs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">CGV</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 CELESTIN IMAGE. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Conditions</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble">
+        <button onclick="toggleChat()" class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-all">
+            <i class="fas fa-comment-dots text-2xl"></i>
+        </button>
+    </div>
+
+    <script>
+        function toggleChat() {
+            // Fonctionnalité de chat à implémenter
+            alert("Bienvenue! Notre studio est disponible par téléphone au +237 690 188 729 ou par email à yvesmvondinet@gmail.com");
+        }
+
+        function scrollToCategory(categoryId) {
+            const element = document.getElementById(categoryId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=YVESAA1/mon-site" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
